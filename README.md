@@ -25,11 +25,6 @@ gcc main.c -o cms
 ./cms
 ```
 
-## Known Limitations
-
-- Fields read with `scanf("%s", ...)` (e.g. class, field, type, work) do not support spaces — use single words like `BCS_FY` instead of `BCS FY`.
-- Some character array fields have small fixed sizes and may overflow with long single-word inputs.
-
 ## What I Learned
 
 - Structs and arrays of structs
