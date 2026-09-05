@@ -46,6 +46,10 @@ void attendpercentstaff();
 void displayrec();
 void menu();
 void loadData();
+void editRecord();
+void editStudent();
+void editTeacher();
+void editStaff();
 //mainfunction
 int main() {
     loadData();
@@ -181,7 +185,7 @@ void attendpercentteacher() {
     char nametofind[50];
     int foundIndex = -1;
     float attend;
-    printf("Enter Your Roll No For the Attendance Report :");
+    printf("Enter Your Name For the Attendance Report :");
     scanf("%s", nametofind);
  
     for(int i = 0; i < teacherCount; i++) {
@@ -269,7 +273,8 @@ int choice;
         printf("6. Teacher Attendance Report\n");
         printf("7. Staff Attendance Report\n");
         printf("8. Display All Records\n");
-        printf("9. Exit\n");
+        printf("9. Edit a Record\n");
+        printf("10. Exit\n");
         printf("Enter your choice: ");
         scanf("%d", &choice);
 
@@ -299,8 +304,11 @@ int choice;
                 displayrec();
                 break;
             case 9:
+                editRecord();
+                break;
+            case 10:
                 printf("Exiting program. Goodbye!\n");
-                return;
+                return;                
             default:
                 printf("Invalid choice, try again.\n");
         }
@@ -332,5 +340,254 @@ void loadData() {
             staffcount++;
         }
         fclose(fp);
+    }
+}
+//11
+void editRecord() {
+int choice;
+
+    while (1) {
+    printf("1.Student\n");
+    printf("2.Teacher\n");
+    printf("3.Staff\n");
+    printf("0.Menu");
+    printf("Enter Your  Choice : ");
+    scanf("%d", &choice);
+
+    switch (choice) {
+        case 1:
+            editStudent();
+            break;
+        case 2:
+            editTeacher();
+            break;
+        case 3:
+            editStaff();
+            break;
+        case 0:
+            return;
+        default:
+                printf("Invalid choice, try again.\n");
+
+    }
+    }
+}
+//12
+void editStudent() {
+    int foundIndex=-1;
+    int rollnotofind;
+    int choice;
+
+    printf("Enter The Roll No : ");
+    scanf("%d", &rollnotofind);
+
+    for(int i= 0; i <studentCount; i++){
+        if(students[i].rollno == rollnotofind){
+            foundIndex =i;
+            break;
+        }
+    }
+
+    if(foundIndex < 0){
+        printf("No User Found");
+    }else{
+        printf("Name : %s\n", students[foundIndex].name);
+        printf("Roll NO. : %d\n", students[foundIndex].rollno);
+        printf("Class : %s\n", students[foundIndex].class);
+        printf("Gender : %c\n", students[foundIndex].gender);
+        printf("Marks : %d\n", students[foundIndex].marks);
+        printf("Attendance : %d\n", students[foundIndex].attend);
+        printf("------------------------------------------------------\n");
+    }
+    while(1){
+        printf("1.Name\n");
+        printf("2.Class\n");
+        printf("3.Gender\n");
+        printf("4.Marks\n");
+        printf("5.Attendance\n");
+        printf("0.Done\n");
+        scanf("%d", &choice);
+
+        switch (choice){
+            case 1:
+                printf("New Name : ");
+                scanf("%s", students[foundIndex].name);
+                break;
+            case 2:
+                printf("New Class : ");
+                scanf("%s", students[foundIndex].class);
+                break;
+            case 3:
+                printf("New Gender : ");
+                scanf(" %c", &students[foundIndex].gender);
+                break;
+            case 4:
+                printf("New Marks  : ");
+                scanf("%d", &students[foundIndex].marks);
+                break;
+            case 5:
+                printf("New Attendance  : ");
+                scanf("%d", &students[foundIndex].attend);
+                break;
+            case 0:
+    {
+        FILE *fp = fopen("students.dat", "wb");
+        for (int i = 0; i < studentCount; i++) {
+            fwrite(&students[i], sizeof(struct Student), 1, fp);
+        }
+        fclose(fp);
+    }
+    return;
+            default:
+                printf("Invalid choice, try again.\n");
+        }
+    }
+
+    
+}
+//13
+void editTeacher() {
+    char nametofind[50];
+    int foundIndex = -1;
+    int choice;
+
+    printf("Enter Your Name :");
+    scanf("%s", nametofind);
+
+    for(int i = 0; i < teacherCount; i++) {
+        if(strcmp(teachers[i].name, nametofind) == 0) {
+            foundIndex = i;
+            break;
+        }
+    }
+
+
+    if(foundIndex < 0) {
+        printf("No User Found !!");
+    }else{printf("Name : %s\n", teachers[foundIndex].name);
+        printf("Field : %s\n", teachers[foundIndex].field);
+        printf("Type : %s\n", teachers[foundIndex].type );
+        printf("Gender : %c\n", teachers[foundIndex].gender);
+        printf("Attendance : %d\n", teachers[foundIndex].attend);
+        printf("Salary : %d\n", teachers[foundIndex].salary);
+                
+    while(1){
+        printf("1.Name\n");
+        printf("2.Field\n");
+        printf("3.Type\n");
+        printf("4.Gender\n");
+        printf("5.Attendance\n");
+        printf("6.Salary\n");
+        printf("0.Done\n");
+        scanf("%d", &choice);
+        
+        switch (choice){
+            case 1:
+                printf("New Name : ");
+                scanf("%s", teachers[foundIndex].name);
+                break;
+            case 2:
+                printf("New Field : ");
+                scanf("%s", teachers[foundIndex].field);
+                break;
+            case 3:
+                printf("New Type : ");
+                scanf("%s", teachers[foundIndex].type);
+                break;
+            case 4:
+                printf("New Gender : ");
+                scanf(" %c", &teachers[foundIndex].gender);
+                break;
+            case 5:
+                printf("New Attendance : ");
+                scanf("%d", &teachers[foundIndex].attend);
+                break;
+            case 6:
+                printf("New Salary : ");
+                scanf("%d", &teachers[foundIndex].salary);
+                break;
+            case 0:
+    {
+        FILE *fp = fopen("teachers.dat", "wb");
+        for (int i = 0; i < teacherCount; i++) {
+            fwrite(&teachers[i], sizeof(struct Teacher), 1, fp);
+        }
+        fclose(fp);
+    }
+    return;
+            default:
+                printf("Invalid Choice");
+            
+            }
+        }
+}
+}
+//14
+void editStaff() {
+    char nametofind[50];
+    int foundIndex = -1;
+    int choice;
+    printf("Enter Your Name :");
+    scanf("%s", nametofind);
+
+    for(int i = 0; i < staffcount; i++) {
+        if(strcmp(staffs[i].name, nametofind) == 0) {
+            foundIndex = i;
+            break;
+        }
+    }
+
+    if(foundIndex < 0) {
+        printf("No User Found !!");
+    }else{
+        printf("Name : %s\n", staffs[foundIndex].name);
+        printf("Location : %s\n", staffs[foundIndex].location);
+        printf("Work : %s\n", staffs[foundIndex].work );
+        printf("Attendance : %d\n", staffs[foundIndex].attend);
+        printf("Salary : %d\n", staffs[foundIndex].salary);
+
+        while(1){
+        printf("1.Name\n");
+        printf("2.Location\n");
+        printf("3.Work\n");
+        printf("4.Attendance\n");
+        printf("5.Salary\n");
+        printf("0.Done\n");
+        scanf("%d", &choice);
+        
+        switch(choice){
+            case 1:
+                printf("New Name : ");
+                scanf("%s", staffs[foundIndex].name);
+                break;
+            case 2:
+                printf("New Location : ");
+                scanf("%s", staffs[foundIndex].location);
+                break;
+            case 3:
+                printf("New Work : ");
+                scanf("%s", staffs[foundIndex].work);
+                break;
+            case 4:
+                printf("New Attendance : ");
+                scanf("%d", &staffs[foundIndex].attend);
+                break;
+            case 5:
+                printf("New Salary : ");
+                scanf("%d", &staffs[foundIndex].salary);
+                break;
+           case 0:
+    {
+        FILE *fp = fopen("staff.dat", "wb");
+        for (int i = 0; i < staffcount; i++) {
+            fwrite(&staffs[i], sizeof(struct Staff), 1, fp);
+        }
+        fclose(fp);
+    }
+    return;
+            default:
+                printf("Invalid Choice");
+        }
+        }
     }
 }
