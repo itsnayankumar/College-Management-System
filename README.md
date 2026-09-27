@@ -1,6 +1,6 @@
 # College Management System (C)
 
-A simple, menu-driven College Management System written in C. Built as a mini-project to practice structs, functions, file handling, and modular program design.
+A menu-driven College Management System written in C. Built as a mini-project to practice structs, functions, file handling, pointers, and modular multi-file program design.
 
 ## Features
 
@@ -12,22 +12,30 @@ A simple, menu-driven College Management System written in C. Built as a mini-pr
 6. Teacher Attendance Report
 7. Staff Attendance Report
 8. Display All Records
-9. Exit
+9. Edit a Record (Student / Teacher / Staff)
+10. Exit
 
-## Data Storage
+## Project Structure
 
-Records for students, teachers, and staff are stored in-memory using arrays of structs, and persisted across program runs using binary file I/O (`students.dat`, `teachers.dat`, `staff.dat`).
+The project is split across multiple files by entity, instead of one large `main.c`:
 
-## How to Compile & Run
+# College Management System (C)
 
-```bash
-gcc main.c -o cms
-./cms
-```
+A menu-driven College Management System written in C. Built as a mini-project to practice structs, functions, file handling, pointers, and modular multi-file program design.
 
-## What I Learned
+## Features
 
-- Structs and arrays of structs
-- Linear search (by roll number / name using `strcmp`)
-- Binary file I/O with `fopen`, `fwrite`, `fread`, `fclose`
-- Menu-driven program design using `switch` and an infinite `while(1)` loop
+1. Add Student
+2. Add Teacher
+3. Add Staff
+4. Calculate Student CGPA
+5. Student Attendance Report
+6. Teacher Attendance Report
+7. Staff Attendance Report
+8. Display All Records
+9. Edit a Record (Student / Teacher / Staff)
+10. Exit
+
+## Project Structure
+
+The project is split across multiple files by entity, instead of one large `main.c`:
