@@ -1,3 +1,11 @@
 a.out
 *.exe
 *.dat
+
+# Python
+__pycache__/
+venv/
+.venv/
+
+# Compiled C program
+cms
